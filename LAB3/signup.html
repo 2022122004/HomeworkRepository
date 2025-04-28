@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>INTERNET-PROGRAMMING assignment2</title>
+        <link rel = "stylesheet" type = "text/css" href = "main.css">
+    </head>
+    <body>
+        
+        <h1>
+            Welcome to INTERNET-PROGRAMMING movie site!!
+        </h1>
+        <a href="login.html">로그인</a>
+        <a href="signup.html">회원가입</a>
+        <form action="https://example.com/submit" method="get">
+            <div class="form-container">
+                <p>
+                    <label>이름: </label><input name="name" type="text" autofocus/>
+                </p>
+                <p>
+                    <label> 생년월일: </label><input name='date' type = 'date' />
+                </p>
+                <p>
+                    <label>성별: </label>
+                    남성<input name='sex' type='radio'value='남성' required/>
+                    여성<input name='sex' type='radio'value='여성'/>
+                </p>
+                <p>
+                    <label> 학년: </label><input name='grade' type='number' min="1" step="1" max="4" value="1"/>
+                </p>
+                <p>
+                    <label>아이디: </label><input name="id" type="text" autocomplete="on"/>
+                </p>
+                <p>
+                    <label>비밀번호: </label><input name="password" type="password" />
+                </p>
+                <p>
+                    <label> 이메일: </label><input name='email' type='email' placeholder = '이메일주소@domain.com' />
+                </p>
+                
+                <p>
+                    <label>보안질문: </label>
+                    <select name="question">
+                        <option value="Romance">몇 년도에 대학에 입학했나요?</option>
+                        <option value="Thriller">아버지의 차종은 무엇인가요?</option>
+                        <option value="Action">어린 시절 별명은 무엇인가요?</option>
+                    </select>
+                </p>
+                <p>
+                    <label>답변: </label><input name="answer" type="text"/>
+                </p>
+                <p>
+                    <a href="login.html"><button type="submit" class="버튼1">Signup</button></a>
+                    <a href="login.html"><button type="reset" class="버튼2">Cancel</button></a>
+                </p>
+            </div>
+        </form>
+    </body>
+</html>
+
+<!--*//select (dropdown)와 radio 모두 사용 (각 10점, 총 20점)
+• 최소 5개의 각기 다른 HTML5 input 사용 text, date, number, email, radio, select
+• 한 개의 input 칸 마다 4점 (총 5개: 20점)
+• 아래 attribute 중 5개를 각각 적어도 1회 이상 사용 (HTML input 받을 때)
+• autofocus 완료, placeholder완료, required완료, step완료, autocomplete완료
+• 한 개의 인풋마다 위의 attribute 사용시 각 4점 (총 5개: 20점)
+• 5개 모두 서로 다른 attribute 사용하여야 함
+• 동일한 속성을 2회 이상 사용할 경우, 한 개만 사용한 것으로 인정함
+
+• login.html 페이지로 link 되어있는 버튼 (총 10점)
+• Redirection 버튼/링크 (5점)
+• signup 페이지에서 login 페이지로 redirection 해주는 기능
+• login 페이지 (5점)
+• signup 페이지 및 예시와 같이 비슷하게 만들면 점수 부여

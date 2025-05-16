@@ -1,0 +1,250 @@
+@keyframes moving {
+  0% {
+    transform: translateX(200%);  
+  }
+  100% {
+    transform: translateX(0%); 
+  }
+}
+
+.title_wrapper{
+  max-width: 1020px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: flex-start;    
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+.main_title {
+  animation-name: moving;
+  animation-duration: 2s;
+}
+
+.container {
+  max-width: 1020px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: flex-start;    
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+.nav_container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  height: 100%; 
+}
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap; 
+}
+
+ul {
+  display: flex;
+}
+li {
+  margin: 0 10px; 
+}
+
+.flex_container_outer {
+    display: flex; 
+    flex-direction: column; 
+    background-color: blue;
+  }
+
+.flex_container_mid {
+    display: flex; 
+    flex-direction: column; 
+    background-color: rgb(41, 203, 76);
+  }
+.image_group{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    background-color: blueviolet;
+  }
+
+.flex_container_inner {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding:10px;
+
+  }
+.flex_container_inner img{
+    display: block;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    background-color: rgb(160, 127, 61);
+    padding: 15px;
+    margin: 10px;
+  }
+.img_hover{ 
+    transition: transform 2s ;
+    transition-delay: 0.5s;
+  }
+.img_hover:hover { 
+  transform: scale(1.8);
+  }
+
+.hover_wrapper{ /* 완성*/
+  position: relative;
+}
+.hovertext { /* 완성*/
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: red;
+
+  display: flex;
+  opacity: 0; 
+  transition: opacity 0.1s linear;
+}
+.movie {
+  max-width: 320px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+
+.image-container {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.summary {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  display: none; /* 처음엔 숨김 */
+  font-size: 14px;
+}
+
+.image-container:hover .summary {
+  display: block; /* hover 시 나타남 */
+}
+
+
+.text_container{
+  column-count: 2;
+  column-rule: 3px solid black;
+}
+
+
+@media (min-width: 481px) and (max-width: 800px) {
+  .navigation {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .image_group {
+    flex: 1 1 50%;
+    flex-direction: column;
+  }
+  
+    
+}
+@media (max-width: 480px) {
+  .navigation {
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+  ul {
+    flex-direction: column;
+  }
+  .image_group > * {
+    flex: 1 1 100%;
+    flex-direction: column;
+  }
+  
+}
+
+@media (min-width: 801px) {
+  .image_group > * {
+    flex: 1 1 20%;
+  }
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background-color: #5db8f0;
+  text-align: center;
+}
+
+h1{
+  font-family: Arial, sans-serif;
+  font-size:2em;
+}
+
+.form-container {
+  font-size: 1.2em;
+  border: 2px solid rgb(148, 34, 129);
+  margin: 10px;
+  margin-left: 80px;
+  margin-right: 80px;
+  padding: 15px;
+  text-align: left;
+}
+
+.form-container p {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.form-container label {
+  display: inline-block;
+  width: 120px;
+  margin-left:40px;
+}
+
+.버튼1, input[type="submit"] {
+  background-color: #37bb16; 
+  color: rgb(0, 0, 0);
+  padding: 5px 25px;
+  border: 3px solid rgb(148, 34, 129); 
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100px;
+  height:35px;
+  margin-left:40px;
+}
+
+.버튼2, input[type="reset"] {
+  background-color: #e31414; 
+  color: white;
+  padding: 5px 25px;
+  border: 3px solid rgb(148, 34, 129);
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100px;
+  height:35px;
+  margin-left:10px;
+}

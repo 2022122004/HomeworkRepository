@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <div class="title_wrapper">
+            <h1 class="main_title">인프밍 영화 정보 사이트입니다.</h1>
+        </div>
+        
+        <link rel = "stylesheet" type = "text/css" href = "main.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="nav_container">
+                <nav class="navigation">
+                    <ul>
+                        <li><a href="index.html">메인페이지</a></li>
+                        <li><a href="login.html" >로그인</a></li>
+                        <li><a href="signup.html">회원가입</a></li>
+                    </ul>
+                </nav> 
+            </div>
+            <div id="sortOptions">
+                <label><input type="radio" name="sort" value="rating_desc" onclick="sortMovies()"> 평점 내림차순</label>
+                <label><input type="radio" name="sort" value="rating_asc" onclick="sortMovies()"> 평점 오름차순</label>
+                <label><input type="radio" name="sort" value="date_desc" onclick="sortMovies()"> 개봉일 내림차순</label>
+                <label><input type="radio" name="sort" value="date_asc" onclick="sortMovies()"> 개봉일 오름차순</label>
+            </div>
+            <h1>영화 검색</h1>
+            <input type="text" id="searchInput" placeholder="영화 제목을 입력하세요">
+            <button onclick="searchMovie()">검색</button>
+            <div id="result" class="result"></div>
+        </div>
+        <div id="movieList"></div>
+        
+        <script>
+          let allMovies = [];
+          let filteredMovies = [];
+          let currentIndex = 0;
+          const pageSize = 5;
+
+          window.addEventListener('DOMContentLoaded', () => {
+            fetch('product.json')
+              .then(res => {
+                if (!res.ok) throw new Error('JSON 파일 불러오기 실패');
+                return res.json();
+              })
+              .then(data => {
+                allMovies = data;
+                filteredMovies = [...allMovies];
+                sortAndDisplay(); 
+              })
+              .catch(err => {
+                console.error(err);
+                document.getElementById('result').innerText = '데이터를 불러올 수 없습니다.';
+              });
+          });
+
+          function getSelectedSort() {
+            const radios = document.getElementsByName('sort');
+            for (const radio of radios) {
+              if (radio.checked) return radio.value;
+            }
+            return null;
+          }
+
+          function sortAndDisplay(reset = true) {
+            const sortBy = getSelectedSort();
+
+            if (sortBy === 'rating_desc') {
+              filteredMovies.sort((a, b) => b.rating - a.rating);
+            } else if (sortBy === 'rating_asc') {
+              filteredMovies.sort((a, b) => a.rating - b.rating);
+            } else if (sortBy === 'date_desc') {
+              filteredMovies.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+            } else if (sortBy === 'date_asc') {
+              filteredMovies.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+            }
+
+            if (reset) {
+              currentIndex = 0;
+              document.getElementById('result').innerHTML = '';
+            }
+
+            loadMore();
+          }
+
+          function loadMore() {
+            const resultDiv = document.getElementById('result');
+            const nextBatch = filteredMovies.slice(currentIndex, currentIndex + pageSize);
+
+            nextBatch.forEach(m => {
+              const movieDiv = document.createElement('div');
+              movieDiv.className = 'movie';
+
+              movieDiv.innerHTML = `
+                <div class="image-container">
+                  <img src="${m.image}" alt="${m.title}">
+                  <div class="summary">${m.summary}</div>
+                </div>
+                <h3>${m.title}</h3>
+                <p>개봉일: ${m.release_date}</p>
+                <p>평점: ${m.rating}</p>
+                <p>러닝타임: ${m.runtime_minutes}분</p>
+              `;
+
+              resultDiv.appendChild(movieDiv);
+            });
+
+            currentIndex += pageSize;
+          }
+
+          window.onscroll = () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+              loadMore();
+            }
+          };
+
+          function searchMovie() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            if (keyword === '') {
+              filteredMovies = [...allMovies];
+            } else {
+              filteredMovies = allMovies.filter(m => m.title.toLowerCase().includes(keyword));
+            }
+
+            sortAndDisplay();
+          }
+
+          function sortMovies() {
+            sortAndDisplay(true);
+          }
+        </script>
+
+    </body>
+</html>
